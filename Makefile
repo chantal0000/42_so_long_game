@@ -1,57 +1,20 @@
-# VARIABLES
-NAME		= so_long
-LIBFT_NAME	= libft.a
-MLX42_NAME	= libmlx42.a
-
-CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror
-MLX42_FLAGS = -ldl -lglfw -pthread -lm
-LIBFT_DIR	= ./libft
-MLX42_DIR	= ./MLX42
-
-SRCS		= main.c \
-			  # Add other source files here
-
-OBJS		= $(SRCS:.c=.o)
-
-# BUILD TARGETS
+NAME = so_long
+SRC =
+GNL_SRC =
+PRINTF_SRC =
+OBJ := $(SRC:%.c=%.o)
+GNL_OBJ := $(GNL_SRC:%.c=%.o)
+PRINTF_OBJ := $(PRINTF_SRC:%.c=%.o)
+CC = gcc
+CCFLAGS = -Wextra -Wall -Werror
 all: $(NAME)
-
-# Build the 'libft.a' library
-makelibft:
-	@make -C $(LIBFT_DIR)
-	@cp $(LIBFT_DIR)/$(LIBFT_NAME) .
-	@mv $(LIBFT_NAME) $(NAME)
-
-# Build the 'libmlx42.a' library
-makemlx42:
-	if [ -d ${MLX42_DIR} ]; \
-	then git -C ${MLX42_DIR} pull; \
-	else git clone git@github.com:codam-coding-college/MLX42.git ${MLX42_DIR}; \
-	fi
-	cd ${MLX42_DIR} && \
-	cmake -B build && \
-	cmake --build build -j4
-
-# Use pattern rule for building object files
+$(NAME): $(OBJ) $(GNL_OBJ) $(PRINTF_OBJ)
+    $(CC) $(CCFLAGS) $^ -lmlx   -lXext  -lX11   -Lmlx   -framework OpenGL -framework AppKit -o $(NAME)
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Linking rule for creating the final executable
-$(NAME): makelibft makemlx42 $(OBJS)
-	$(CC) $(OBJS) ${MLX42_DIR}/build/${MLX42_NAME} -Iinclude $(MLX42_FLAGS) -o $(NAME)
-
-
-
+    gcc $(CCFLAGS) -Imlx -Iincludes -c $< -o $@
 clean:
-	@rm -f $(OBJS)
-	@cd $(LIBFT_DIR) && make clean
-
+    rm -f $(OBJ) $(GNL_OBJ) $(PRINTF_OBJ)
 fclean: clean
-	@rm -f $(NAME)
-	@cd $(LIBFT_DIR) && make fclean
-
-# Rebuild the project from scratch
-re: fclean all
-
-.PHONY: all clean fclean re
+    make clean -C mlx/
+    rm -f $(NAME)
+re : fclean all

@@ -6,7 +6,7 @@
 #    By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:57:13 by chbuerge          #+#    #+#              #
-#    Updated: 2023/12/29 18:13:17 by chbuerge         ###   ########.fr        #
+#    Updated: 2023/12/29 18:37:55 by chbuerge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ REMOVE = rm -f
 LIBFT_DIR = ./libft
 
 
-SRC = main.c
+SRC = main.c \
+		check_map.c
 
 OBJS = ${SRC:.c=.o}
 

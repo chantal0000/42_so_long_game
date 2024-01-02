@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:30 by chbuerge          #+#    #+#             */
-/*   Updated: 2023/12/29 19:06:59 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/02 08:33:50 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,8 @@ int    read_map(char *file_name)
     fd = open(file_name, O_RDONLY);
     if (fd == -1)
     {
-        printf("check 01E, fd == -1\n");
-        return (1);
-        // error handle
+        printf("fd == -1, problem with input file\n");
+        handle_error();
     }
    while  ((new_line = get_next_line(fd)) != NULL)
     {

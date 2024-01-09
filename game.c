@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 08:46:39 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/09 17:51:51 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:56:49 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,17 @@ void	get_tiles(t_map *map)
 		{
 			img = mlx_xpm_file_to_image(map->mlx, SPACE_XPM, &img_width, &img_height);
 			mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
-			//if(map->map_array[x][y] == '1')
-			//{
-			//	img = mlx_xpm_file_to_image(map->mlx, WALLS_XPM, &img_width, &img_height);
-			//	mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
-			//}
+			if(map->map_array[y][x] == '1')
+			{
+				printf("t3\n");
+			img = mlx_xpm_file_to_image(map->mlx, WALLS_XPM, &img_width, &img_height);
+			mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
+			}
 		x++;
 		}
 	y++;
 	}
 }
-
-
-
 
 void	init_game(t_map *map)
 {

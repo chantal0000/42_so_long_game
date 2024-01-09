@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/03 13:59:01 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:20:45 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,21 @@
 #include <unistd.h>
 # include "./libft/libft.h"
 
-# define IMG_HEIGHT	320
-# define IMG_WIDTH	320
+# define IMG_HEIGHT	64
+# define IMG_WIDTH	64
 # define WALL		'1'
 # define SPACE		'0'
 # define PLAYER		'P'
 # define MAP_EXIT	'E'
 # define COLLECTABLE 'C'
 
-# define SPACE_XPM "assets/space.xpm"
+# define SPACE_XPM "assets/space1.xpm"
+# define WALLS_XPM "assets/walls.xpm"
+# define MELONE_XPM "assets/collectable.xpm"
+# define EXIT_XPM "assets/exit.xpm"
+# define PLAYER_XPM "assets/player.xpm"
+
+
 
 typedef struct s_player
 {
@@ -51,6 +57,13 @@ typedef struct s_exit
     int y;
 }   t_exit;
 
+typedef struct s_collectable
+{
+    bool collectable_exists;
+    int x;
+    int y;
+}   t_collectable;
+
 typedef struct s_wall
 {
     int count_lines;
@@ -60,12 +73,17 @@ typedef struct s_wall
 typedef struct s_map
 {
     int fd;
+	void *mlx;
+	void *mlx_win;
 	int	total_number_of_lines;
 	int length_of_lines;
     t_wall *wall;
     t_player *player;
     t_exit *exit;
     int collectable;
+	int	columns;
+	int	rows;
+	char **map_array;
     //struct s_map *next;
 }	t_map;
 
@@ -85,6 +103,8 @@ typedef struct	s_data {
 	int		endian;
 }				t_data;
 
+
+
 // CHECK_MAP
 void    check_map(char *current_row, t_map *map);
 void    check_player(char *current_row, t_map *map);
@@ -99,7 +119,7 @@ void handle_error(void);
 void	count_lines(t_map *map);
 
 // GAME
-void	init_game();
+void	init_game(t_map *map);
 
 
 #endif

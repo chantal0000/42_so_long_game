@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/09 17:20:45 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:39:48 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,23 @@
 
 # define SPACE_XPM "assets/space1.xpm"
 # define WALLS_XPM "assets/walls.xpm"
-# define MELONE_XPM "assets/collectable.xpm"
+# define PRICE_XPM "assets/collectable.xpm"
 # define EXIT_XPM "assets/exit.xpm"
-# define PLAYER_XPM "assets/player.xpm"
+# define PLAYER_XPM "assets/smile.xpm"
 
+// KEYS
+# define W 119
+# define A 97
+# define S 115
+# define D 100
 
+# define UP 65362
+# define LEFT 65361
+# define DOWN 65364
+# define RIGHT 65363
+
+# define ESC 65307
+//
 
 typedef struct s_player
 {

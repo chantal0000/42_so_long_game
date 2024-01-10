@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 08:46:39 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/09 17:56:49 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:55:13 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,51 @@ void	get_tiles(t_map *map)
 			mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
 			if(map->map_array[y][x] == '1')
 			{
-				printf("t3\n");
-			img = mlx_xpm_file_to_image(map->mlx, WALLS_XPM, &img_width, &img_height);
-			mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
+				img = mlx_xpm_file_to_image(map->mlx, WALLS_XPM, &img_width, &img_height);
+				mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
+			}
+			else if(map->map_array[y][x] == 'C')
+			{
+				img = mlx_xpm_file_to_image(map->mlx, PLAYER_XPM, &img_width, &img_height);
+				mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
 			}
 		x++;
 		}
 	y++;
 	}
 }
+int	mouse_hook(int keycode, t_map *map)
+{
+	printf("Hello from mouse_hook!\n");
+	// seg fault when called fct below
+	//mlx_destroy_window(map->mlx, map->mlx_win);
+
+	return (0);
+}
+void	key_hook(int keycode, t_map *map)
+{
+	if (keycode == LEFT || keycode == A)
+		printf("LEFT\n");
+	else if(keycode == UP || keycode == W)
+		printf("UP\n");
+	else if(keycode == RIGHT || keycode == D)
+		printf("RIGHT\n");
+	else if(keycode == DOWN || keycode == S)
+		printf("DOWN\n");
+}
+
+/*
+int key_hook(int keycode, t_map *map)
+{
+	if (keycode == ESC)
+	{
+		printf("Hello!\n");
+	// seg fault when called fct below
+	// its closing it BUT I get a seg fault
+	//mlx_destroy_window(map->mlx, map->mlx_win);
+	}
+	return (0);
+}*/
 
 void	init_game(t_map *map)
 {
@@ -104,7 +140,7 @@ void	init_game(t_map *map)
 		handle_error();
 		free(map->mlx);
 	}
-	printf("IMG_HEIGHT %d map->rows %d\n", IMG_HEIGHT, map->columns);
+	printf("IMG_HEIGHT %d map->col %d\n", IMG_HEIGHT, map->columns);
 	map->mlx_win = mlx_new_window(map->mlx, (IMG_WIDTH * map->columns), (IMG_HEIGHT * map->rows), "so_long");
 	// load img
 	if (!map->mlx_win)
@@ -113,21 +149,10 @@ void	init_game(t_map *map)
 		free(map->mlx);
 	}
 	get_tiles(map);
-	//
-	//img = mlx_xpm_file_to_image(map->mlx, SPACE_XPM, &img_width, &img_height);
-	//mlx_put_image_to_window(map->mlx, map->mlx_win, img, 90, 100);
-/*
-	img = mlx_xpm_file_to_image(mlx, MELONE_XPM, &img_width, &img_height);
-	mlx_put_image_to_window(mlx, map->mlx_win, img, 0, 0);
+	mlx_mouse_hook(map->mlx_win, mouse_hook, &map);
+	mlx_key_hook(map->mlx_win, key_hook, &map);
 
-	img = mlx_xpm_file_to_image(mlx, WALLS_XPM, &img_width, &img_height);
-	mlx_put_image_to_window(mlx, map->mlx_win, img, 300, 300);
 
-	img = mlx_xpm_file_to_image(mlx, PLAYER_XPM, &img_width, &img_height);
-	mlx_put_image_to_window(mlx, map->mlx_win, img, 400, 400);
-	//
-	img = mlx_xpm_file_to_image(mlx, EXIT_XPM, &img_width, &img_height);
-*/
 	if (img !=NULL)
 	{
 

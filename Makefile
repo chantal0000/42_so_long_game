@@ -6,7 +6,7 @@
 #    By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:57:13 by chbuerge          #+#    #+#              #
-#    Updated: 2024/01/03 10:57:17 by chbuerge         ###   ########.fr        #
+#    Updated: 2024/01/10 14:57:33 by chbuerge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ LIBFT_DIR = ./libft
 SRC = main.c \
 		check_map.c \
 		so_long_utils.c \
-		game.c
+		game.c \
+		play.c
 
 OBJS = ${SRC:.c=.o}
 

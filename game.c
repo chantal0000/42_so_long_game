@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 08:46:39 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/10 14:55:13 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:57:17 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,27 @@ void	get_tiles(t_map *map)
 			}
 			else if(map->map_array[y][x] == 'C')
 			{
+				img = mlx_xpm_file_to_image(map->mlx, PRICE_XPM, &img_width, &img_height);
+				mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
+			}
+			else if(map->map_array[y][x] == 'P')
+			{
 				img = mlx_xpm_file_to_image(map->mlx, PLAYER_XPM, &img_width, &img_height);
+				mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
+			}
+			else if(map->map_array[y][x] == 'E')
+			{
+				img = mlx_xpm_file_to_image(map->mlx, EXIT_XPM, &img_width, &img_height);
 				mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
 			}
 		x++;
 		}
 	y++;
 	}
+	printf("starting pos: %d\n", map->pos_player_x);
+	printf("starting pos: %d\n", map->pos_player_y);
 }
+//
 int	mouse_hook(int keycode, t_map *map)
 {
 	printf("Hello from mouse_hook!\n");
@@ -99,17 +112,7 @@ int	mouse_hook(int keycode, t_map *map)
 
 	return (0);
 }
-void	key_hook(int keycode, t_map *map)
-{
-	if (keycode == LEFT || keycode == A)
-		printf("LEFT\n");
-	else if(keycode == UP || keycode == W)
-		printf("UP\n");
-	else if(keycode == RIGHT || keycode == D)
-		printf("RIGHT\n");
-	else if(keycode == DOWN || keycode == S)
-		printf("DOWN\n");
-}
+
 
 /*
 int key_hook(int keycode, t_map *map)
@@ -123,6 +126,8 @@ int key_hook(int keycode, t_map *map)
 	}
 	return (0);
 }*/
+
+
 
 void	init_game(t_map *map)
 {
@@ -149,8 +154,8 @@ void	init_game(t_map *map)
 		free(map->mlx);
 	}
 	get_tiles(map);
-	mlx_mouse_hook(map->mlx_win, mouse_hook, &map);
-	mlx_key_hook(map->mlx_win, key_hook, &map);
+
+	//update_pos(map);
 
 
 	if (img !=NULL)
@@ -162,5 +167,9 @@ void	init_game(t_map *map)
 		// free img
 		mlx_destroy_image(map->mlx, img);
 	}
+	//mlx_mouse_hook(map->mlx_win, mouse_hook, &map);
+	mlx_key_hook(map->mlx_win, key_hook, map);
+
 	mlx_loop(map->mlx);
+
 }

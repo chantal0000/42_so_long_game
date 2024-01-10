@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/10 14:39:48 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/10 18:56:31 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ typedef struct s_map
 	int	columns;
 	int	rows;
 	char **map_array;
+	int pos_player_x;
+	int pos_player_y;
     //struct s_map *next;
 }	t_map;
 
@@ -124,6 +126,8 @@ void    check_exit(char *current_row, t_map *map);
 void    check_walls_and_shape(char *current_row, t_map *map);
 
 // MAIN
+t_map	init_map_struct(t_map *map);
+
 
 // SO_LONG_UTILS
 void handle_error(void);
@@ -133,5 +137,10 @@ void	count_lines(t_map *map);
 // GAME
 void	init_game(t_map *map);
 
+//PLAY
+
+int	key_hook(int keycode, t_map *map);
+//void	check_next_field(int keycode, t_map *map);
+void	my_test_function();
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/11 11:50:58 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/11 15:21:54 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 // free
 #include <stdlib.h>
 // boolean function
-# include <stdbool.h>
+#include <stdbool.h>
 // write
 #include <unistd.h>
 # include "./libft/libft.h"
@@ -92,12 +92,14 @@ typedef struct s_map
     t_wall *wall;
     t_player *player;
     t_exit *exit;
-    int collectable;
+	int	collectable_total;
+    int	collectable;
 	int	columns;
 	int	rows;
 	char **map_array;
 	int pos_player_x;
 	int pos_player_y;
+	int move_counter;
     //struct s_map *next;
 }	t_map;
 
@@ -142,9 +144,9 @@ void	init_game(t_map *map);
 
 int check_next_field(int move, char key, t_map *map);
 // GAME_PLAY
-
-int	key_hook(int keycode, t_map *map);
+int		check_for_win(t_map *map);
+int		key_hook(int keycode, t_map *map);
 //void	check_next_field(int keycode, t_map *map);
-int check_next_field(int move, char key, t_map *map);
+int		check_next_field(int move, char key, t_map *map);
 
 #endif

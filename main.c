@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:30 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/10 18:49:31 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/11 15:22:12 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ t_map	init_map_struct(t_map *map)
 	map->pos_player_y = 0;
 	map->columns = 0;
 	map->rows = 0;
+	map->collectable = 0;
+	map->collectable_total = 0;
+	map->move_counter = 0;
 
 	///
 	map->mlx = NULL;
@@ -63,6 +66,7 @@ int	read_map(char *file_name)
 	{
 		//currently the checking is not working;
 		//check_map(new_line, map);
+
 		map->rows++;
 		map->columns = (ft_strlen(new_line) - 1);
 		//printf("col %d rows %d\n", map->columns, map->rows);
@@ -102,12 +106,15 @@ int	read_map(char *file_name)
 				map->pos_player_x = l;
 				map->pos_player_y = k;
 			}
+			if (map->map_array[k][l] == 'C')
+				map->collectable_total++;
+
 			//printf("map->map_array[%d][%d]: %c\n", k, l, map->map_array[k][l]);
 			l++;
 		}
 		//printf("my line[%d]: %s \n", k, map->map_array[k]);
 		k++;
-}
+}		//printf("collactable total %d\n", map->collectable_total);
 		// set up the game
 		init_game(map);
 

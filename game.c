@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 08:46:39 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/11 11:26:07 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/11 11:32:11 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,52 +73,29 @@ void	init_game()
 }*/
 void	get_tiles(t_map *map)
 {
-	int x = 0;
-	int y = 0;
-	//int		img_width;
-	//int		img_height;
+	int x;
+	int y;
 
-	//void *img;
-	printf("t1\n");
+	x = 0;
+	y = 0;
 	while(y < map->rows)
 	{
-		printf("t2\n");
 		x = 0;
 		while(x < map->columns)
 		{
 			put_img(map, SPACE_XPM, x, y);
-			//img = mlx_xpm_file_to_image(map->mlx, SPACE_XPM, &img_width, &img_height);
-			//mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
 			if(map->map_array[y][x] == '1')
-			{
 				put_img(map, WALLS_XPM, x, y);
-				//img = mlx_xpm_file_to_image(map->mlx, WALLS_XPM, &img_width, &img_height);
-				//mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
-			}
 			else if(map->map_array[y][x] == 'C')
-			{
 				put_img(map, PRICE_XPM, x, y);
-				//img = mlx_xpm_file_to_image(map->mlx, PRICE_XPM, &img_width, &img_height);
-				//mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
-			}
 			else if(map->map_array[y][x] == 'P')
-			{
 				put_img(map, PLAYER_XPM, x, y);
-				//img = mlx_xpm_file_to_image(map->mlx, PLAYER_XPM, &img_width, &img_height);
-				//mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
-			}
 			else if(map->map_array[y][x] == 'E')
-			{
 				put_img(map, EXIT_XPM, x, y);
-				//img = mlx_xpm_file_to_image(map->mlx, EXIT_XPM, &img_width, &img_height);
-				//mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
-			}
 		x++;
 		}
 	y++;
 	}
-	printf("starting pos: %d\n", map->pos_player_x);
-	printf("starting pos: %d\n", map->pos_player_y);
 }
 //
 int	mouse_hook(int keycode, t_map *map)
@@ -131,30 +108,12 @@ int	mouse_hook(int keycode, t_map *map)
 }
 
 
-/*
-int key_hook(int keycode, t_map *map)
-{
-	if (keycode == ESC)
-	{
-		printf("Hello!\n");
-	// seg fault when called fct below
-	// its closing it BUT I get a seg fault
-	//mlx_destroy_window(map->mlx, map->mlx_win);
-	}
-	return (0);
-}*/
 
 
 
 void	init_game(t_map *map)
 {
-	//void	*mlx;
 	void	*img;
-	//char	*relative_path = "assets/space.xpm";
-	int		img_width;
-	int		img_height;
-	//void	*map->mlx_win;
-
 
 	map->mlx = mlx_init();
 	if (!map->mlx)

@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:14:34 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/02 11:36:58 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/11 11:45:14 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void handle_error(void)
 	// free all things here
 	exit (1);
 }
-
+/* NOT IN USE?
 void	count_lines(t_map *map)
 {
 		map->total_number_of_lines++;
-}
+}*/

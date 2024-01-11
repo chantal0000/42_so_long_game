@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   play.c                                             :+:      :+:    :+:   */
+/*   game_play.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:28:35 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/11 11:23:24 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/11 11:50:27 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // function when key pressed figure out which tile to check next
 // send map and location of tile to check_next_tile
 // 1. key handle
-
+/* CURRENTLY NOT IN USE
 int update_pos(t_map *map)
 {
 	int i = map->pos_player_x;
@@ -29,7 +29,8 @@ int update_pos(t_map *map)
 		// map->pos_player_x = map->pos_player_x - 1;
 		// check_next_fields(map);
 	return(0);
-}
+}*/
+
 // do i need all ifs?
 int	key_hook(int keycode, t_map *map)
 {
@@ -55,8 +56,6 @@ int	key_hook(int keycode, t_map *map)
 	}
 	return (0);
 }
-
-
 
 int check_next_field(int move, char key, t_map *map)
 {
@@ -118,11 +117,5 @@ int check_next_field(int move, char key, t_map *map)
 	return(0);
 
 }
-
-
-// move player
-// when key pressed check next tile
-	// if != '1'
-		// if == '0
 
 

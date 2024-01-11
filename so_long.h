@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/11 11:15:53 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/11 11:50:58 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,14 +132,16 @@ t_map	init_map_struct(t_map *map);
 // SO_LONG_UTILS
 void handle_error(void);
 
-void	count_lines(t_map *map);
+//void	count_lines(t_map *map);
 
-// GAME
+// GAME_SETUP
+void	put_img(t_map *map, char *img_path, int x, int y);
+void	get_tiles(t_map *map);
 void	init_game(t_map *map);
 
 
 int check_next_field(int move, char key, t_map *map);
-//PLAY
+// GAME_PLAY
 
 int	key_hook(int keycode, t_map *map);
 //void	check_next_field(int keycode, t_map *map);

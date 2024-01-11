@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 08:46:39 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/10 18:57:17 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/11 11:26:07 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,18 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
+}
+// general function to put xpm_images anywhere
+void	put_img(t_map *map, char *img_path, int x, int y)
+{
+	char	*img;
+	int		img_width;
+	int		img_height;
+
+	img_width = 0;
+	img_height = 0;
+	img = mlx_xpm_file_to_image(map->mlx, img_path, &img_width, &img_height);
+    mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
 }
 // creates a new sprite img using the data loaded from the XPM file
 /*
@@ -63,10 +75,10 @@ void	get_tiles(t_map *map)
 {
 	int x = 0;
 	int y = 0;
-	int		img_width;
-	int		img_height;
+	//int		img_width;
+	//int		img_height;
 
-	void *img;
+	//void *img;
 	printf("t1\n");
 	while(y < map->rows)
 	{
@@ -74,27 +86,32 @@ void	get_tiles(t_map *map)
 		x = 0;
 		while(x < map->columns)
 		{
-			img = mlx_xpm_file_to_image(map->mlx, SPACE_XPM, &img_width, &img_height);
-			mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
+			put_img(map, SPACE_XPM, x, y);
+			//img = mlx_xpm_file_to_image(map->mlx, SPACE_XPM, &img_width, &img_height);
+			//mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
 			if(map->map_array[y][x] == '1')
 			{
-				img = mlx_xpm_file_to_image(map->mlx, WALLS_XPM, &img_width, &img_height);
-				mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
+				put_img(map, WALLS_XPM, x, y);
+				//img = mlx_xpm_file_to_image(map->mlx, WALLS_XPM, &img_width, &img_height);
+				//mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
 			}
 			else if(map->map_array[y][x] == 'C')
 			{
-				img = mlx_xpm_file_to_image(map->mlx, PRICE_XPM, &img_width, &img_height);
-				mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
+				put_img(map, PRICE_XPM, x, y);
+				//img = mlx_xpm_file_to_image(map->mlx, PRICE_XPM, &img_width, &img_height);
+				//mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
 			}
 			else if(map->map_array[y][x] == 'P')
 			{
-				img = mlx_xpm_file_to_image(map->mlx, PLAYER_XPM, &img_width, &img_height);
-				mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
+				put_img(map, PLAYER_XPM, x, y);
+				//img = mlx_xpm_file_to_image(map->mlx, PLAYER_XPM, &img_width, &img_height);
+				//mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
 			}
 			else if(map->map_array[y][x] == 'E')
 			{
-				img = mlx_xpm_file_to_image(map->mlx, EXIT_XPM, &img_width, &img_height);
-				mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
+				put_img(map, EXIT_XPM, x, y);
+				//img = mlx_xpm_file_to_image(map->mlx, EXIT_XPM, &img_width, &img_height);
+				//mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
 			}
 		x++;
 		}

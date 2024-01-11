@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:28:35 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/11 10:49:23 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/11 11:23:24 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,12 @@ int	key_hook(int keycode, t_map *map)
 	}
 	return (0);
 }
+
+
+
 int check_next_field(int move, char key, t_map *map)
 {
-	char *img;
-	int img_width;
-	int img_height;
+
 //if key code UP || DOWN -> y
 //if key code LEFT || RIGHT -> x
 	if (key == 'x')
@@ -68,12 +69,12 @@ int check_next_field(int move, char key, t_map *map)
 		if((map->map_array[map->pos_player_y][map->pos_player_x + move] == '0') ||
 			(map->map_array[map->pos_player_y][map->pos_player_x + move] == 'C'))
 			{
-				printf("pos: %d\n", map->pos_player_x);
+				//printf("pos: %d\n", map->pos_player_x);
+				//put background on the old position
+				put_img(map, SPACE_XPM, map->pos_player_x, map->pos_player_y);
 				map->pos_player_x = map->pos_player_x + move;
 				//put img of player
-				//put background on the old position
-				img = mlx_xpm_file_to_image(map->mlx, PLAYER_XPM, &img_width, &img_height);
-				mlx_put_image_to_window(map->mlx, map->mlx_win, img, map->pos_player_x * 64, map->pos_player_y * 64);
+				put_img(map, PLAYER_XPM, map->pos_player_x, map->pos_player_y);
 				// safe info about collectable
 				printf("space or collect\n");
 			}
@@ -88,12 +89,13 @@ int check_next_field(int move, char key, t_map *map)
 		if((map->map_array[map->pos_player_y + move][map->pos_player_x] == '0') ||
 		(map->map_array[map->pos_player_y + move][map->pos_player_x] == 'C'))
 		{
-			printf("pos y: %d\n", map->pos_player_y);
+			//printf("pos y: %d\n", map->pos_player_y);
+				// put background tile on old pos
+				put_img(map, SPACE_XPM, map->pos_player_x, map->pos_player_y);
+				// update pos to new one
 				map->pos_player_y = map->pos_player_y + move;
 				//put img of player
-				//put background on the old position
-				img = mlx_xpm_file_to_image(map->mlx, PLAYER_XPM, &img_width, &img_height);
-				mlx_put_image_to_window(map->mlx, map->mlx_win, img, map->pos_player_x * 64, map->pos_player_y * 64);
+				put_img(map, PLAYER_XPM, map->pos_player_x, map->pos_player_y);
 				// safe info about collectable
 				printf("space or collect\n");
 		}

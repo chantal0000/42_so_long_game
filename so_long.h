@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/11 10:44:34 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/11 11:15:53 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,6 +137,8 @@ void	count_lines(t_map *map);
 // GAME
 void	init_game(t_map *map);
 
+
+int check_next_field(int move, char key, t_map *map);
 //PLAY
 
 int	key_hook(int keycode, t_map *map);

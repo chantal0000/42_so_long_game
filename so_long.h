@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/10 18:56:31 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/11 10:44:34 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,6 @@ void	init_game(t_map *map);
 
 int	key_hook(int keycode, t_map *map);
 //void	check_next_field(int keycode, t_map *map);
-void	my_test_function();
+int check_next_field(int move, char key, t_map *map);
 
 #endif

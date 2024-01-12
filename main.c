@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:30 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/11 15:22:12 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:34:45 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 t_map	init_map_struct(t_map *map)
 {
-    // whats a good place to put this all?
+    //whats a good place to put this all?
 	map->player = malloc(sizeof(t_player));
 	map->exit = malloc(sizeof(t_exit));
 	map->wall = malloc(sizeof(t_wall));
@@ -37,20 +37,30 @@ t_map	init_map_struct(t_map *map)
 	map->collectable = 0;
 	map->collectable_total = 0;
 	map->move_counter = 0;
+	map->walls_image = NULL;
+    map->space_image = NULL;
+    map->player_image = NULL;
+    map->price_image = NULL;
+    map->exit_image = NULL;
 
 	///
 	map->mlx = NULL;
 	map->mlx_win = NULL;
+
+	//////
+
+
 	return(*map);
 }
 
-int	read_map(char *file_name)
+t_map	*read_map(char *file_name)
 {
 	int fd;
 	int k = 0;
 	int l = 0;
 
 	char *new_line = NULL;
+	char *line = NULL;
 	t_map *map = malloc(sizeof(t_map));
 	if (!map)
 		return (NULL);
@@ -64,43 +74,44 @@ int	read_map(char *file_name)
 	}
 	while ((new_line = get_next_line(fd)) != NULL)
 	{
-		//currently the checking is not working;
-		//check_map(new_line, map);
-
 		map->rows++;
 		map->columns = (ft_strlen(new_line) - 1);
-		//printf("col %d rows %d\n", map->columns, map->rows);
-        //free(new_line);
+		free(new_line);
     }
+	//free(new_line);
 	close(fd);
-	// open again to safe/copy the info into my things;
+
+	// open again to safe/copy the info array into my struct;
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 	{
 		printf("fd == -1, problem with input file\n");
 		handle_error();
 	}
-// allocate memory for the map array
+	// allocate memory for the map array
+	// + 1?
 	map->map_array = malloc(sizeof(char *) * map->rows);
 	if (!map->map_array)
 		return NULL;
-// allocate memory for the array in the array
-	while(k < map->rows)
+	// allocate memory for the array in the array
+/* 	while(k < map->rows)
 	{
+
 		map->map_array[k] = malloc(sizeof(char) * (map->columns + 1));
+		//map->map_array[k] = malloc(sizeof(char *));
 		if (!map->map_array[k])
 			return NULL;
 		k++;
-	}
+	} */
 	// fill the array
 	k = 0;
-	while ((new_line = get_next_line(fd)) != NULL && k < map->rows)
+
+	while ((line = get_next_line(fd)) != NULL && k < map->rows)
 	{
-		map->map_array[k] = new_line;
+		map->map_array[k] = ft_strdup(line);
+		free(line);
 		l = 0;
-		while(k < map->columns && new_line[l + 1] != '\0')
-		{
-			map->map_array[k][l] = new_line[l];
+		while(map->map_array[k][l + 1] != '\0') {
 			if (map->map_array[k][l] == 'P')
 			{
 				map->pos_player_x = l;
@@ -108,21 +119,20 @@ int	read_map(char *file_name)
 			}
 			if (map->map_array[k][l] == 'C')
 				map->collectable_total++;
-
-			//printf("map->map_array[%d][%d]: %c\n", k, l, map->map_array[k][l]);
 			l++;
 		}
-		//printf("my line[%d]: %s \n", k, map->map_array[k]);
 		k++;
-}		//printf("collactable total %d\n", map->collectable_total);
+		//free(line);
+	}		//printf("collactable total %d\n", map->collectable_total);
 		// set up the game
+		//free(line);
 		init_game(map);
 
 	// checking here because in the check for player I always only check one line
     if ((!(map->player->player_exists)) || !(map->exit->exit_exists))
          handle_error();
     printf("\n");
-    return (0);
+    return (map);
 }
 
 int main(int argc, char **argv)
@@ -134,3 +144,21 @@ int main(int argc, char **argv)
 	}
 	return (0);
 }
+		//your old version
+		// while(k < map->columns && new_line[l + 1] != '\0')
+		// {
+		// 	map->map_array[k][l] = new_line[l];
+		// 	if (map->map_array[k][l] == 'P')
+		// 	{
+		// 		map->pos_player_x = l;
+		// 		map->pos_player_y = k;
+		// 	}
+		// 	if (map->map_array[k][l] == 'C')
+		// 		map->collectable_total++;
+
+		// 	//printf("map->map_array[%d][%d]: %c\n", k, l, map->map_array[k][l]);
+		// 	l++;
+		// }
+		//printf("my line[%d]: %s \n", k, map->map_array[k]);
+		// if i free here it tells me i am trying to delete memory that is already freed
+		//free(line);

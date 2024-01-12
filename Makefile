@@ -6,14 +6,14 @@
 #    By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:57:13 by chbuerge          #+#    #+#              #
-#    Updated: 2024/01/11 11:44:20 by chbuerge         ###   ########.fr        #
+#    Updated: 2024/01/11 16:25:13 by chbuerge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 LIBFT_NAME = libft/libft.a
 
-CFLAGS = -Wextra -Wall -g
+CFLAGS = -Wextra -Wall -Werror -g
 MINILIBX_FLAGS = -Lmlx_linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 
 CC = cc
@@ -26,7 +26,8 @@ SRC = main.c \
 		check_map.c \
 		so_long_utils.c \
 		game_setup.c \
-		game_play.c
+		game_play.c \
+		free.c
 
 OBJS = ${SRC:.c=.o}
 

@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/11 15:21:54 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:34:50 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 #include <stdbool.h>
 // write
 #include <unistd.h>
+// NULL
+#include <stddef.h>
+
+
 # include "./libft/libft.h"
 
 # define IMG_HEIGHT	64
@@ -82,6 +86,13 @@ typedef struct s_wall
 	int	data;
 } t_wall;
 
+typedef struct s_xpm
+{
+	void	*img_xpm_ptr;
+	int		x;
+	int		y;
+} t_xpm;
+
 typedef struct s_map
 {
     int fd;
@@ -100,6 +111,12 @@ typedef struct s_map
 	int pos_player_x;
 	int pos_player_y;
 	int move_counter;
+// not used yet:
+	void *walls_image;
+    void *space_image;
+    void *player_image;
+    void *price_image;
+    void *exit_image;
     //struct s_map *next;
 }	t_map;
 
@@ -137,7 +154,7 @@ void handle_error(void);
 //void	count_lines(t_map *map);
 
 // GAME_SETUP
-void	put_img(t_map *map, char *img_path, int x, int y);
+void	*put_img(t_map *map, char *img_path, int x, int y);
 void	get_tiles(t_map *map);
 void	init_game(t_map *map);
 
@@ -148,5 +165,11 @@ int		check_for_win(t_map *map);
 int		key_hook(int keycode, t_map *map);
 //void	check_next_field(int keycode, t_map *map);
 int		check_next_field(int move, char key, t_map *map);
+
+
+// FREE
+void	clean_up(t_map *map);
+void	ft_free(t_map *map);
+void	ft_destroy_images(t_map *map);
 
 #endif

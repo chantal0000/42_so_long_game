@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:28:35 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/11 15:25:05 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:27:52 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,16 @@ int	check_for_win(t_map *map)
 		printf("YOU WIN with %d moves\n", map->move_counter);
 
 		// seg fault her
-		mlx_destroy_window(map->mlx, map->mlx_win);
-		exit(1);
+
+		// free all resources etc. like make sure everything is ready to be quit
+		// before or after destroying window?
+
+		// whats happening here?
+		//ft_destroy_images(map);
+		clean_up(map);
+
+		//clean_up(map);
+		exit(0);
 		//return(0);
 	}
 	else
@@ -61,22 +69,22 @@ int	key_hook(int keycode, t_map *map)
 	if (keycode == LEFT || keycode == A)
 	{
 		check_next_field(-1, 'x', map);
-		printf("LEFT\n");
+		//printf("LEFT\n");
 	}
 	else if(keycode == UP || keycode == W)
 	{
 		check_next_field(-1, 'y', map);
-		printf("UP\n");
+		//printf("UP\n");
 	}
 	else if(keycode == RIGHT || keycode == D)
 	{
 		check_next_field(1, 'x', map);
-		printf("RIGHT\n");
+		//printf("RIGHT\n");
 	}
 	else if(keycode == DOWN || keycode == S)
 	{
 		check_next_field(1, 'y', map);
-		printf("DOWN\n");
+		//printf("DOWN\n");
 	}
 	return (0);
 }
@@ -97,45 +105,46 @@ int check_next_field(int move, char key, t_map *map)
 
 	//if (key == 'x')
 	//{
-	printf("pos1: %d\n", map->pos_player_x);
-		if((map->map_array[j][i] == '0') ||
-			(map->map_array[j][i] == 'C') )//|| (map->map_array[j][i] == 'E'))
-			{
+	//printf("pos1: %d\n", map->pos_player_x);
+	if((map->map_array[j][i] == '0') ||
+		(map->map_array[j][i] == 'C') )//|| (map->map_array[j][i] == 'E'))
+		{
 				// if C somehow safe info into my struct /
-				if (map->map_array[j][i] == 'C')
-					map->collectable++;
+			if (map->map_array[j][i] == 'C')
+				map->collectable++;
 					/*
 				if (map->map_array[j][i] == 'E')
 				{
 					if(check_for_win(map) == 1)
 						put_img(map, EXIT_XPM, map->pos_player_x, map->pos_player_y);
 				}*/
-				printf("price: %d\n", map->collectable);
+				//printf("price: %d\n", map->collectable);
 				//printf("pos: %d\n", map->pos_player_x);
 				//put background on the old position
-				put_img(map, SPACE_XPM, map->pos_player_x, map->pos_player_y);
-				if (key == 'x')
-					map->pos_player_x = map->pos_player_x + move;
-				else if (key == 'y')
-					map->pos_player_y = map->pos_player_y + move;
+			if (map->space_image != NULL)
+				mlx_destroy_image(map->mlx, map->space_image);
+			map->space_image = put_img(map, SPACE_XPM, map->pos_player_x, map->pos_player_y);
+			if (key == 'x')
+				map->pos_player_x = map->pos_player_x + move;
+			else if (key == 'y')
+				map->pos_player_y = map->pos_player_y + move;
 				//put img of player
-				put_img(map, PLAYER_XPM, map->pos_player_x, map->pos_player_y);
-				map->move_counter++;
-				printf("moves: %d\n", map->move_counter);
-				printf("space or collect\n");
-			}
-			else if(map->map_array[j][i] == 'E')
-			{
-				check_for_win(map);
-
-			}
-			else if(map->map_array[j][i] == '1')
-			{
-				printf("alert, wall!\n");
+			if (map->player_image != NULL)
+				mlx_destroy_image(map->mlx, map->player_image);
+			map->player_image = put_img(map, PLAYER_XPM, map->pos_player_x, map->pos_player_y);
+			map->move_counter++;
+			printf("moves: %d\n", map->move_counter);
+				//printf("space or collect\n");
+		}
+		else if(map->map_array[j][i] == 'E')
+		{
+			check_for_win(map);
+		}
+		else if(map->map_array[j][i] == '1')
+		{
+			printf("alert, wall!\n");
 				// what to do if wall?
-			}
-
-
+		}
 	return(0);
 
 }

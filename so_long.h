@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/12 16:34:50 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:26:47 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@
 
 # define IMG_HEIGHT	64
 # define IMG_WIDTH	64
+/*
 # define WALL		'1'
 # define SPACE		'0'
 # define PLAYER		'P'
 # define MAP_EXIT	'E'
-# define COLLECTABLE 'C'
+# define COLLECTABLE 'C'*/
 
 # define SPACE_XPM "assets/space1.xpm"
 # define WALLS_XPM "assets/walls.xpm"
@@ -57,7 +58,7 @@
 # define RIGHT 65363
 
 # define ESC 65307
-//
+
 
 typedef struct s_player
 {
@@ -83,23 +84,15 @@ typedef struct s_collectable
 typedef struct s_wall
 {
     int count_lines;
+	//??
 	int	data;
 } t_wall;
-
-typedef struct s_xpm
-{
-	void	*img_xpm_ptr;
-	int		x;
-	int		y;
-} t_xpm;
 
 typedef struct s_map
 {
     int fd;
 	void *mlx;
 	void *mlx_win;
-	int	total_number_of_lines;
-	int length_of_lines;
     t_wall *wall;
     t_player *player;
     t_exit *exit;
@@ -120,23 +113,12 @@ typedef struct s_map
     //struct s_map *next;
 }	t_map;
 
-typedef struct s_image
-{
-	void	*xpm_ptr;
-	int			x;
-	int			y;
-}	t_image;
-
-//
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
-
+// typedef struct s_image
+// {
+// 	void	*xpm_ptr;
+// 	int			x;
+// 	int			y;
+// }	t_image;
 
 // CHECK_MAP
 void    check_map(char *current_row, t_map *map);
@@ -145,11 +127,13 @@ void    check_exit(char *current_row, t_map *map);
 void    check_walls_and_shape(char *current_row, t_map *map);
 
 // MAIN
+int		read_map(char *file_name);
+int		create_map_array(char *file_name, t_map *map, int fd);
 t_map	init_map_struct(t_map *map);
 
 
 // SO_LONG_UTILS
-void handle_error(void);
+void handle_error(t_map *map);
 
 //void	count_lines(t_map *map);
 
@@ -169,7 +153,6 @@ int		check_next_field(int move, char key, t_map *map);
 
 // FREE
 void	clean_up(t_map *map);
-void	ft_free(t_map *map);
-void	ft_destroy_images(t_map *map);
+void	free_array(t_map *map);
 
 #endif

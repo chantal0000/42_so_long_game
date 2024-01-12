@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 08:46:39 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/12 16:33:21 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:53:07 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,7 @@ void	*put_img(t_map *map, char *img_path, int x, int y)
 	return (img);
 }
 
-// ==24704==    definitely lost: 8,363 bytes in 69 blocks
-// ==24704==    indirectly lost: 0 bytes in 0 blocks
-// ==24704==      possibly lost: 0 bytes in 0 blocks
-// ==24704==    still reachable: 136 bytes in 1 blocks
+
 
 void	get_tiles(t_map *map)
 {
@@ -74,7 +71,11 @@ void	get_tiles(t_map *map)
 				map->walls_image = put_img(map, WALLS_XPM, x, y);
 			}
 			else if(map->map_array[y][x] == 'C')
+			{
+				if (map->price_image != NULL)
+					mlx_destroy_image(map->mlx, map->price_image);
 				map->price_image = put_img(map, PRICE_XPM, x, y);
+			}
 			else if(map->map_array[y][x] == 'P')
 				map->player_image = put_img(map, PLAYER_XPM, x, y);
 			else if(map->map_array[y][x] == 'E')
@@ -105,14 +106,14 @@ void	init_game(t_map *map)
 	map->mlx = mlx_init();
 	if (!map->mlx)
 	{
-		handle_error();
+		handle_error(map);
 	//	free(map->mlx);
 	}
 	map->mlx_win = mlx_new_window(map->mlx, (IMG_WIDTH * map->columns), (IMG_HEIGHT * map->rows), "so_long");
 	// load img
 	if (!map->mlx_win)
 	{
-		handle_error();
+		handle_error(map);
 	//	free(map->mlx);
 	}
 	if (img != NULL)

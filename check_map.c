@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 18:34:45 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/03 08:15:22 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:52:48 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,17 @@ void    check_player(char *current_row, t_map *map)
             else if ((*current_row == 'P' && (map->player->player_exists)))
             {
                 printf("player already exists\n");
-                handle_error();
+                handle_error(map);
             }
             current_row++;
         }
 }
+/*
 void	allowed_chars(char *current_row)
 {
 	if (*current_row != 'E' || *current_row != '0' || *current_row != '1' || *current_row != 'P' || *current_row != 'C' || *current_row != '\n')
-		handle_error();
-}
+		handle_error(map);
+}*/
 void    check_exit(char *current_row, t_map *map)
 {
         while (*current_row)
@@ -55,7 +56,7 @@ void    check_exit(char *current_row, t_map *map)
             else if (*current_row == 'E' && map->exit->exit_exists)
             {
                 printf("exit already exists\n");
-                handle_error();
+                handle_error(map);
             }
             current_row++;
         }
@@ -77,12 +78,11 @@ void    check_walls_and_shape(char *current_row, t_map *map)
 			if (*current_row != '1')
 			{
 				printf("Invalid character detected: %c\n", *current_row);
-				handle_error();
+				handle_error(map);
 			}
 		}
 		current_row++;
 	}
-	printf("total number of lines %d\n", map->total_number_of_lines);
 }
 
 // if line == 0 or last one? than str[i] muss 1 sein sonst error

@@ -6,56 +6,52 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:30 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/12 18:31:36 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:51:49 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-//initialize the struct?
-
-t_map	init_map_struct(t_map *map)
+//function to initialize the map structure I/II
+void	init_map_struct(t_map *map)
 {
 	map->fd = 0;
 	map->mlx = NULL;
 	map->mlx_win = NULL;
-
 	map->wall = malloc(sizeof(t_wall));
 	map->wall->count_lines = 0;
 	map->wall->data = 0;
-
 	map->player = malloc(sizeof(t_player));
 	map->player->player_exists = false;
 	map->player->x = 0;
 	map->player->y = 0;
-
 	map->exit = malloc(sizeof(t_exit));
 	map->exit->exit_exists = false;
 	map->exit->x = 0;
 	map->exit->y = 0;
-
 	map->collectable_total = 0;
 	map->collectable = 0;
 	map->columns = 0;
 	map->rows = 0;
+	init_map_struct_2(map);
+}
 
+//function to initialize the map structure II/II
+void	init_map_struct_2(t_map *map)
+{
 	map->map_array = NULL;
 	map->pos_player_x = 0;
 	map->pos_player_y = 0;
 	map->move_counter = 0;
-
 	map->walls_image = NULL;
-    map->space_image = NULL;
-    map->player_image = NULL;
-    map->price_image = NULL;
-    map->exit_image = NULL;
-	return(*map);
+	map->space_image = NULL;
+	map->player_image = NULL;
+	map->price_image = NULL;
+	map->exit_image = NULL;
 }
-
 
 //function to read the map and gather information
 // calls the create map array function
-
 int	read_map(char *file_name)
 {
 	int fd;

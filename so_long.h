@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/12 18:26:47 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:51:23 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,8 @@ void    check_walls_and_shape(char *current_row, t_map *map);
 // MAIN
 int		read_map(char *file_name);
 int		create_map_array(char *file_name, t_map *map, int fd);
-t_map	init_map_struct(t_map *map);
+void	init_map_struct(t_map *map);
+void	init_map_struct_2(t_map *map);
 
 
 // SO_LONG_UTILS

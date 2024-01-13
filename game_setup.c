@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 08:46:39 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/12 17:53:07 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/13 10:50:46 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,28 @@ void	get_tiles(t_map *map)
 	}
 }
 //
-/* CURRENTLY NOT IN USE, MAYBE FOR CLOSING THE WINDOW?
+/* CURRENTLY NOT IN USE, MAYBE FOR CLOSING THE WINDOW?*/
 
-int	mouse_hook(int keycode, t_map *map)
-{
-	printf("Hello from mouse_hook!\n");
-	// seg fault when called fct below
-	mlx_destroy_window(map->mlx, map->mlx_win);
+// int	mouse_hook(int keycode, t_map *map)
+// {
+// 	keycode = 1;
+// 	printf("Hello from mouse_hook!\n");
+// 	// seg fault when called fct below
+// 	//mlx_destroy_window(map->mlx, map->mlx_win);
+// 	clean_up(map);
+// 	exit(1);
+// 	return (0);
+// }
 
-	return (0);
-}*/
+// int	close_window_on_x(int event, t_map *map)
+// {
+// 	if (event == 17)
+// 	{
+// 		clean_up(map);
+// 		exit(0);
+// 	}
+// 	return (0);
+// }
 // function to set up the game, include game loop
 // create window
 void	init_game(t_map *map)
@@ -124,6 +136,6 @@ void	init_game(t_map *map)
 	}
 	get_tiles(map);
 	mlx_key_hook(map->mlx_win, key_hook, map);
-	//mouse_hook(keycode, map);
+	//mlx_mouse_hook(map->mlx_win, mouse_hook, map);
 	mlx_loop(map->mlx);
 }

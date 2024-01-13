@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/12 18:51:23 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/13 10:40:01 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ void handle_error(t_map *map);
 void	*put_img(t_map *map, char *img_path, int x, int y);
 void	get_tiles(t_map *map);
 void	init_game(t_map *map);
+
+int	close_window_on_x(int event, t_map *map);
 
 
 int check_next_field(int move, char key, t_map *map);

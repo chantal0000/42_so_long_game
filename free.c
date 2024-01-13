@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:17:58 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/13 10:24:35 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/13 15:17:57 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,6 @@ void	clean_up(t_map *map)
 		mlx_destroy_display(map->mlx);
 	if(map->mlx)
 		free(map->mlx);
-	if(map->player)
-		free(map->player);
-	if(map->exit)
-		free(map->exit);
-	if(map->wall)
-		free(map->wall);
 	if(map)
 		free(map);
 }

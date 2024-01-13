@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/13 10:40:01 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/13 15:12:15 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,22 +63,16 @@
 typedef struct s_player
 {
     bool player_exists;
-    int x;
-    int y;
 }   t_player;
 
 typedef struct s_exit
 {
     bool exit_exists;
-    int x;
-    int y;
 }   t_exit;
 
 typedef struct s_collectable
 {
     bool collectable_exists;
-    int x;
-    int y;
 }   t_collectable;
 
 typedef struct s_wall
@@ -93,9 +87,9 @@ typedef struct s_map
     int fd;
 	void *mlx;
 	void *mlx_win;
-    t_wall *wall;
-    t_player *player;
-    t_exit *exit;
+    int wall;
+    int player;
+    int exit;
 	int	collectable_total;
     int	collectable;
 	int	columns;
@@ -121,13 +115,13 @@ typedef struct s_map
 // }	t_image;
 
 // CHECK_MAP
-void    check_map(char *current_row, t_map *map);
-void    check_player(char *current_row, t_map *map);
+int    check_map(char *current_row, t_map *map);
+int    check_player(char *current_row, t_map *map);
 void    check_exit(char *current_row, t_map *map);
 void    check_walls_and_shape(char *current_row, t_map *map);
 
 // MAIN
-int		read_map(char *file_name);
+t_map		*read_map(char *file_name);
 int		create_map_array(char *file_name, t_map *map, int fd);
 void	init_map_struct(t_map *map);
 void	init_map_struct_2(t_map *map);
@@ -135,6 +129,8 @@ void	init_map_struct_2(t_map *map);
 
 // SO_LONG_UTILS
 void handle_error(t_map *map);
+void	ft_error(char *current_line, t_map *map, int fd);
+
 
 //void	count_lines(t_map *map);
 
@@ -158,4 +154,11 @@ int		check_next_field(int move, char key, t_map *map);
 void	clean_up(t_map *map);
 void	free_array(t_map *map);
 
+
+int	map_check(t_map *map);
+int	check_square(t_map *map, int y);
+int	check_walls(t_map *map, int y, int x);
+int	check_chars(t_map *map, int y, int x);
+void	clean_up_1(t_map *map);
+int	check_player_exit_collect(t_map *map, int y, int x);
 #endif

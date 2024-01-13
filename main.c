@@ -6,53 +6,15 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:30 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/12 18:51:49 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/13 17:14:42 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-//function to initialize the map structure I/II
-void	init_map_struct(t_map *map)
-{
-	map->fd = 0;
-	map->mlx = NULL;
-	map->mlx_win = NULL;
-	map->wall = malloc(sizeof(t_wall));
-	map->wall->count_lines = 0;
-	map->wall->data = 0;
-	map->player = malloc(sizeof(t_player));
-	map->player->player_exists = false;
-	map->player->x = 0;
-	map->player->y = 0;
-	map->exit = malloc(sizeof(t_exit));
-	map->exit->exit_exists = false;
-	map->exit->x = 0;
-	map->exit->y = 0;
-	map->collectable_total = 0;
-	map->collectable = 0;
-	map->columns = 0;
-	map->rows = 0;
-	init_map_struct_2(map);
-}
-
-//function to initialize the map structure II/II
-void	init_map_struct_2(t_map *map)
-{
-	map->map_array = NULL;
-	map->pos_player_x = 0;
-	map->pos_player_y = 0;
-	map->move_counter = 0;
-	map->walls_image = NULL;
-	map->space_image = NULL;
-	map->player_image = NULL;
-	map->price_image = NULL;
-	map->exit_image = NULL;
-}
-
 //function to read the map and gather information
 // calls the create map array function
-int	read_map(char *file_name)
+t_map	*read_map(char *file_name)
 {
 	int fd;
 	char *new_line;
@@ -68,19 +30,22 @@ int	read_map(char *file_name)
 	}
 	map = malloc(sizeof(t_map));
 	if (!map)
-		return (1);
+		return (NULL);
 		// handle error
 	init_map_struct(map);
 	while ((new_line = get_next_line(fd)) != NULL)
 	{
-		check_map(new_line, map);
+		// if (check_map(new_line, map) == 1)
+		// 	ft_error(new_line, map, fd);
+		// printf("rows: %d\n", map->rows);
 		map->rows++;
 		map->columns = (ft_strlen(new_line) - 1);
 		free(new_line);
 	}
+	// here checken ob player, exit und walls exists?
 	close(fd);
 	create_map_array(file_name, map, fd);
-	return(0);
+	return(map);
 }
 
 int create_map_array(char *file_name, t_map *map, int fd)
@@ -121,13 +86,12 @@ int create_map_array(char *file_name, t_map *map, int fd)
 		}
 		k++;
 	}
-		init_game(map);
+	// I think it makes sense to check my map here?!
+	map_check(map);
+	//map->collectable = 0;
+	init_game(map);
 
-	// checking here because in the check for player I always only check one line
-    if ((!(map->player->player_exists)) || !(map->exit->exit_exists))
-         handle_error(map);
-    printf("\n");
-    return (0);
+	return (0);
 }
 
 int main(int argc, char **argv)
@@ -139,21 +103,4 @@ int main(int argc, char **argv)
 	}
 	return (0);
 }
-		//your old version
-		// while(k < map->columns && new_line[l + 1] != '\0')
-		// {
-		// 	map->map_array[k][l] = new_line[l];
-		// 	if (map->map_array[k][l] == 'P')
-		// 	{
-		// 		map->pos_player_x = l;
-		// 		map->pos_player_y = k;
-		// 	}
-		// 	if (map->map_array[k][l] == 'C')
-		// 		map->collectable_total++;
 
-		// 	//printf("map->map_array[%d][%d]: %c\n", k, l, map->map_array[k][l]);
-		// 	l++;
-		// }
-		//printf("my line[%d]: %s \n", k, map->map_array[k]);
-		// if i free here it tells me i am trying to delete memory that is already freed
-		//free(line);

@@ -6,30 +6,13 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 14:28:35 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/13 10:55:54 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/13 11:02:39 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// function when key pressed figure out which tile to check next
-// send map and location of tile to check_next_tile
-// 1. key handle
-/* CURRENTLY NOT IN USE
-int update_pos(t_map *map)
-{
-	int i = map->pos_player_x;
-	int j = map->pos_player_y;
-	printf("1starting pos: %d\n", i);
-	printf("1starting pos: %d\n", j);
-	//int cur_x = map->pos_player_x;
-	//int cur_y = map->pos_player_y;
-	printf("hi\n");
-	// if key_hook == LEFT
-		// map->pos_player_x = map->pos_player_x - 1;
-		// check_next_fields(map);
-	return(0);
-}*/
+// function to check for win and close game, add one final move to counter
 int	check_for_win(t_map *map)
 {
 	// if collectable == total of collectable -> win
@@ -38,19 +21,9 @@ int	check_for_win(t_map *map)
 	{
 		map->move_counter++;
 		printf("YOU WIN with %d moves\n", map->move_counter);
-
-		// seg fault her
-
-		// free all resources etc. like make sure everything is ready to be quit
-		// before or after destroying window?
-
-		// whats happening here?
-		//ft_destroy_images(map);
 		clean_up(map);
 
-		//clean_up(map);
 		exit(0);
-		//return(0);
 	}
 	else
 	{
@@ -59,40 +32,8 @@ int	check_for_win(t_map *map)
 		printf("/////////\n");
 		return(1);
 	}
-	// whats supposed to happen? close window?
 }
 
-
-// do i need all ifs?
-int	key_hook(int keycode, t_map *map)
-{
-	if (keycode == LEFT || keycode == A)
-	{
-		check_next_field(-1, 'x', map);
-		//printf("LEFT\n");
-	}
-	else if(keycode == UP || keycode == W)
-	{
-		check_next_field(-1, 'y', map);
-		//printf("UP\n");
-	}
-	else if(keycode == RIGHT || keycode == D)
-	{
-		check_next_field(1, 'x', map);
-		//printf("RIGHT\n");
-	}
-	else if(keycode == DOWN || keycode == S)
-	{
-		check_next_field(1, 'y', map);
-		//printf("DOWN\n");
-	}
-	else if (keycode == ESC)
-	{
-		clean_up(map);
-		exit(1);
-	}
-	return (0);
-}
 
 int check_next_field(int move, char pos, t_map *map)
 {

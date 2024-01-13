@@ -6,38 +6,55 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 18:34:45 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/12 17:52:48 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/13 12:43:31 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void    check_map(char *current_row, t_map *map)
+// check exactly one player
+int    check_map(char *current_row, t_map *map)
 {
-    check_walls_and_shape(current_row, map);
-    check_player(current_row, map);
-    check_exit(current_row, map);
+	//check_walls_and_shape(current_row, map);
+   printf("%d\n", map->player->player_exists);
+	if (check_player(current_row, map) == 1 )//|| !(map->player->player_exists))
+		return (1);
+   // check_exit(current_row, map);
     // check_collect(current_row);
+	return (0);
+}
+
+
+void	check_walls_and_shape(char *current_row, t_map *map)
+{
+	while(*current_row)
+	{
+		if (map->rows == '0') // or last one
+		{
+			//printf("total number of lines %d\n", map->total_number_of_lines);
+			if (*current_row != '1')
+			{
+				printf("Invalid character detected: %c\n", *current_row);
+				handle_error(map);
+			}
+		}
+		current_row++;
+	}
 }
 // multiple players checker works
-// no player checker works
-void    check_player(char *current_row, t_map *map)
+int	check_player(char *current_row, t_map *map)
 {
-        while (*current_row)
-        {
-            if ((*current_row == 'P' && !(map->player->player_exists)))
-            {
-                map->player->player_exists = true;
-                printf("Player found\n");
-            }
-            else if ((*current_row == 'P' && (map->player->player_exists)))
-            {
-                printf("player already exists\n");
-                handle_error(map);
-            }
-            current_row++;
-        }
+	while (*current_row)
+	{
+		if ((*current_row == 'P' && !(map->player->player_exists)))
+			map->player->player_exists = true;
+		else if ((*current_row == 'P' && (map->player->player_exists)))
+			return (1);
+		current_row++;
+	}
+	return(0);
 }
+
 /*
 void	allowed_chars(char *current_row)
 {
@@ -62,28 +79,7 @@ void    check_exit(char *current_row, t_map *map)
         }
 }
 
-void    check_walls_and_shape(char *current_row, t_map *map)
-{
-	//printf("check01\n");
-	//int len = ft_strlen(current_row);
-	//if (map->wall->count_lines == 1)
-	//	map->length_of_lines = len;
-	while(*current_row && *current_row != '\0' && *current_row != '\n')
-	{
-		//if (len != map->length_of_lines)
-		//	handle_error();
-		if (map->wall->count_lines == 1 ) // or last one
-		{
-			//printf("total number of lines %d\n", map->total_number_of_lines);
-			if (*current_row != '1')
-			{
-				printf("Invalid character detected: %c\n", *current_row);
-				handle_error(map);
-			}
-		}
-		current_row++;
-	}
-}
+
 
 // if line == 0 or last one? than str[i] muss 1 sein sonst error
 // wenn line != pos 0 or last dann muss pos 0 == 1 sein und die ltzte position

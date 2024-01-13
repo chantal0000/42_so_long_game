@@ -6,19 +6,12 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 08:46:39 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/13 10:50:46 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/13 11:00:46 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-/* AM I USING THIS ANYWEHERE?
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}*/
 // general function to put xpm_images anywhere
 /*
 void	put_img(t_map *map, char *img_path, int x, int y)
@@ -32,6 +25,27 @@ void	put_img(t_map *map, char *img_path, int x, int y)
 	img = mlx_xpm_file_to_image(map->mlx, img_path, &img_width, &img_height);
     mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
 }*/
+
+
+// function recoginzing the keys and sending info to check next or closing
+// the game
+int	key_hook(int keycode, t_map *map)
+{
+	if (keycode == LEFT || keycode == A)
+		check_next_field(-1, 'x', map);
+	else if(keycode == UP || keycode == W)
+		check_next_field(-1, 'y', map);
+	else if(keycode == RIGHT || keycode == D)
+		check_next_field(1, 'x', map);
+	else if(keycode == DOWN || keycode == S)
+		check_next_field(1, 'y', map);
+	else if (keycode == ESC)
+	{
+		clean_up(map);
+		exit(0);
+	}
+	return (0);
+}
 
 void	*put_img(t_map *map, char *img_path, int x, int y)
 {

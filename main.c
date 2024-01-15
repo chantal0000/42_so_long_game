@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:30 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/13 17:14:42 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:34:41 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_map	*read_map(char *file_name)
 
 	fd = 0;
 	new_line = NULL;
+	// check file_name here
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
 	{
@@ -94,10 +95,24 @@ int create_map_array(char *file_name, t_map *map, int fd)
 	return (0);
 }
 
+void	check_filetype(char *filename)
+{
+	int	len;
+
+	len = ft_strlen(filename);
+	if(len < 4 || ft_strcmp(filename + len - 4, ".ber") != 0)
+	{
+		printf("Error\n");
+		exit (1);
+	}
+}
+
+
 int main(int argc, char **argv)
 {
     if (argc == 2)
 	{
+		check_filetype(argv[1]);
 		read_map(argv[1]);
 		//init_game();
 	}

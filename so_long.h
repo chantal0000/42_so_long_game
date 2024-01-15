@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/13 15:12:15 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/15 09:37:12 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ t_map		*read_map(char *file_name);
 int		create_map_array(char *file_name, t_map *map, int fd);
 void	init_map_struct(t_map *map);
 void	init_map_struct_2(t_map *map);
+void	check_filetype(char *filename);
 
 
 // SO_LONG_UTILS

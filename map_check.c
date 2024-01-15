@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:08:49 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 10:14:30 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/15 10:23:10 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,28 @@
 
 
 // check that you can reach the exit and collectables from the pos of the player
+
+
+/*
+** Function to check if the given filename has a .ber extension.
+** It compares the last four characters of the filename with ".ber"
+** and exits with an error message if the condition is not met.
+**
+** Parameters:
+**   - filename: The name of the file to be checked.
+*/
+void	check_filetype(char *filename)
+{
+	int	len;
+
+	len = ft_strlen(filename);
+	if(len < 4 || ft_strcmp(filename + len - 4, ".ber") != 0)
+	{
+		printf("Error\n");
+		exit (1);
+	}
+}
+
 
 
 // loop through the array and apply all the checks above

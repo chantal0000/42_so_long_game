@@ -6,15 +6,11 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:08:49 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/13 17:16:50 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/15 10:14:30 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-// check if .ber file
-
-// check that its sourrounded by walls
 
 
 // check that you can reach the exit and collectables from the pos of the player
@@ -27,6 +23,7 @@ int	map_check(t_map *map)
 	int x;
 	int y;
 
+	printf("map->col%d \n", map->columns);
 	x = 0;
 	y = 0;
 	while(y < map->rows)
@@ -34,8 +31,7 @@ int	map_check(t_map *map)
 		// check_square?
 		if(check_square(map, y) == 1)
 			clean_up_1(map);
-		// if (check_walls(map, y, x) == 1)
-		// 	clean_up_1(map);
+
 		x = 0;
 		while(x < map->columns)
 		{
@@ -43,8 +39,10 @@ int	map_check(t_map *map)
 				clean_up_1(map);
 			if (check_player_exit_collect(map, y, x) == 1)
 				clean_up_1(map);
-			// if (check_walls(map, y, x) == 1)
-			// 	clean_up_1(map);
+			if(first_last_row(map, x) == 1)
+				clean_up_1(map);
+			if (first_last_col(map, y) == 1)
+				clean_up_1(map);
 		x++;
 		}
 	y++;
@@ -54,6 +52,29 @@ int	map_check(t_map *map)
 		clean_up_1(map);
 	return (0);
 }
+
+
+// check that its sourrounded by walls (first and last row)
+int	first_last_row(t_map *map, int x)
+{
+	int	last_row;
+
+	last_row = map->rows - 1;
+	if(map->map_array[0][x] != '1' || map->map_array[last_row][x] != '1')
+		return (1);
+	return (0);
+}
+// check that its sourrounded by walls ( ever first and last of each row)
+int	first_last_col(t_map *map, int y)
+{
+	int	last_col;
+
+	last_col = map->columns - 1;
+	if(map->map_array[y][0] != '1' || map->map_array[y][last_col] != '1')
+		return (1);
+	return (0);
+}
+
 // check that exactly one player exists
 // check that exactly one exit exists
 // check that at least one collect exist

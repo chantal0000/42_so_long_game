@@ -6,13 +6,13 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:30 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 09:34:41 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/15 10:17:50 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-//function to read the map and gather information
+// function to read the map and gather information
 // calls the create map array function
 t_map	*read_map(char *file_name)
 {
@@ -94,7 +94,7 @@ int create_map_array(char *file_name, t_map *map, int fd)
 
 	return (0);
 }
-
+//function to check that the input is a .ber filetype
 void	check_filetype(char *filename)
 {
 	int	len;

@@ -6,13 +6,11 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:08:49 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 12:27:40 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:33:26 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
-
-// check that you can reach the exit and collectables from the pos of the player
 
 /*
 ** Validates the 2D map represented by 't_map'.
@@ -40,7 +38,7 @@ void	map_check(t_map *map)
 		while (x < map->columns)
 		{
 			if (check_chars(map, y, x) == 1
-				|| check_player_exit_collect(map, y, x) == 1
+				|| check_player_exit(map, y, x) == 1
 				|| first_last(map, y, x) == 1)
 				clean_up_1(map);
 			x++;
@@ -67,7 +65,7 @@ int	first_last(t_map *map, int y, int x)
 }
 
 // check that not more than one player & exit exists
-int	check_player_exit_collect(t_map *map, int y, int x)
+int	check_player_exit(t_map *map, int y, int x)
 {
 	if (map->map_array[y][x] == 'P' && !(map->player))
 		map->player = 1;

@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:14:34 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 12:58:17 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:48:55 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,57 +20,26 @@ void	ft_error(char *str)
 
 void	clean_up_1(t_map *map)
 {
-	//printf("Error\n");
 	ft_printf("Error\nInvalid configuration detected in the map\n");
 	if (map->map_array)
 		free_array(map);
-	if(map->mlx_win)
+	if (map->mlx_win)
 		mlx_destroy_window(map->mlx, map->mlx_win);
-	if(map->mlx)
+	if (map->mlx)
 		mlx_destroy_display(map->mlx);
-	if(map->mlx)
+	if (map->mlx)
 		free(map->mlx);
-	if(map)
+	if (map)
 		free(map);
 	exit(1);
 }
 
-void handle_error(t_map *map)
+void	handle_error(t_map *map)
 {
 	write(1, "Error\n", 6);
 	clean_up(map);
 	// free all things here
 	exit (1);
-}
-
-//function to initialize the map structure I/II
-void	init_map_struct(t_map *map)
-{
-	//map->fd = 0;
-	map->mlx = NULL;
-	map->mlx_win = NULL;
-	map->wall = 0;
-	map->player = 0;
-	map->exit = 0;
-	map->collectable_total = 0;
-	map->collectable = 0;
-	map->columns = 0;
-	map->rows = 0;
-	init_map_struct_2(map);
-}
-
-//function to initialize the map structure II/II
-void	init_map_struct_2(t_map *map)
-{
-	map->map_array = NULL;
-	map->pos_player_x = 0;
-	map->pos_player_y = 0;
-	map->move_counter = 0;
-	map->walls_image = NULL;
-	map->space_image = NULL;
-	map->player_image = NULL;
-	map->price_image = NULL;
-	map->exit_image = NULL;
 }
 
 /*

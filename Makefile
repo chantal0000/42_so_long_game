@@ -6,7 +6,7 @@
 #    By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/29 13:57:13 by chbuerge          #+#    #+#              #
-#    Updated: 2024/01/15 12:26:49 by chbuerge         ###   ########.fr        #
+#    Updated: 2024/01/15 14:58:19 by chbuerge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,11 +23,13 @@ LIBFT_DIR = ./libft
 
 
 SRC = main.c \
-		map_check/map_check.c \
-		so_long_utils.c \
-		game_setup.c \
-		game_play.c \
-		free.c
+	map_functions/read_and_process_map.c \
+	map_functions/map_check.c \
+	map_functions/map_init.c \
+	so_long_utils.c \
+	game_setup.c \
+	game_play.c \
+	free.c
 
 OBJS = ${SRC:.c=.o}
 

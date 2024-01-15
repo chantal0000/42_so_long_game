@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 10:10:49 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:24:58 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,12 +156,13 @@ void	clean_up(t_map *map);
 void	free_array(t_map *map);
 
 
-int	map_check(t_map *map);
+void	map_check(t_map *map);
 int	check_square(t_map *map, int y);
 int	check_walls(t_map *map, int y, int x);
 int	check_chars(t_map *map, int y, int x);
 void	clean_up_1(t_map *map);
 int	check_player_exit_collect(t_map *map, int y, int x);
-int	first_last_row(t_map *map, int x);
+int	first_last(t_map *map, int y, int x);
 int	first_last_col(t_map *map, int y);
+void	check_filetype(char *file_name);
 #endif

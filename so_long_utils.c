@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:14:34 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/13 15:15:19 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:21:30 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,10 @@ void	ft_error(char *current_line, t_map *map, int fd)
 	exit(1);
 }
 
-
-
 void	clean_up_1(t_map *map)
 {
-	printf("Error\n");
+	//printf("Error\n");
+	ft_printf("Error\nInvalid configuration detected in the map\n");
 	if (map->map_array)
 		free_array(map);
 	if(map->mlx_win)
@@ -80,3 +79,22 @@ void	init_map_struct_2(t_map *map)
 	map->exit_image = NULL;
 }
 
+/*
+** Function to check if the given filename has a .ber extension.
+** It compares the last four characters of the filename with ".ber"
+** and exits with an error message if the condition is not met.
+**
+** Parameters:
+**   - filename: The name of the file to be checked.
+*/
+void	check_filetype(char *file_name)
+{
+	int	len;
+
+	len = ft_strlen(file_name);
+	if (len < 4 || ft_strcmp(file_name + len - 4, ".ber") != 0)
+	{
+		ft_printf("Error\nEncountered a mistake in the file: %s\n", file_name);
+		exit (1);
+	}
+}

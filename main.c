@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:30 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 10:39:09 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/15 11:54:57 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ int	main(int argc, char **argv)
 {
 	if (argc == 2)
 	{
-		ft_printf("Let's play\n");
 		check_filetype(argv[1]);
 		read_map(argv[1]);
 	}

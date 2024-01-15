@@ -6,21 +6,15 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:14:34 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 12:21:30 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/15 12:58:17 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_error(char *current_line, t_map *map, int fd)
+void	ft_error(char *str)
 {
-	write(1, "Error\n", 6);
-	free(current_line);
-	close(fd);
-	free(map);
-
-	//current_line = 0;
-	//clean_up(map);
+	ft_printf("%s", str);
 	exit(1);
 }
 
@@ -52,7 +46,7 @@ void handle_error(t_map *map)
 //function to initialize the map structure I/II
 void	init_map_struct(t_map *map)
 {
-	map->fd = 0;
+	//map->fd = 0;
 	map->mlx = NULL;
 	map->mlx_win = NULL;
 	map->wall = 0;

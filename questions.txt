@@ -1,4 +1,0 @@
-05.01.2023
-- how do I get the grid / map and the xpm files at the positions
-	of the grid and numbers?
-

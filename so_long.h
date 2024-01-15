@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 12:36:41 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:29:13 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define IMG_HEIGHT	64
 # define IMG_WIDTH	64
 
+// IMAGE PATHS
 # define SPACE_XPM "assets/space1.xpm"
 # define WALLS_XPM "assets/walls.xpm"
 # define PRICE_XPM "assets/collectable.xpm"
@@ -52,7 +53,7 @@
 
 typedef struct s_map
 {
-	int fd;
+	//int fd;
 	void *mlx;
 	void *mlx_win;
 	int wall;
@@ -75,11 +76,12 @@ typedef struct s_map
 
 
 // MAIN.C
-t_map		*read_map(char *file_name);
+int		read_map(char *file_name, t_map *map);
 int		create_map_array(char *file_name, t_map *map, int fd);
 void	init_map_struct(t_map *map);
 void	init_map_struct_2(t_map *map);
 void	check_filetype(char *filename);
+void	array_loop(char *new_line, int fd, t_map *map);
 
 // MAP_CHECK/MAP_CHECK.C
 void	map_check(t_map *map);
@@ -88,12 +90,12 @@ int		check_player_exit(t_map *map, int y, int x);
 int		check_square(t_map *map, int y);
 int		check_chars(t_map *map, int y, int x);
 
+
 // SO_LONG_UTILS
 void handle_error(t_map *map);
-void	ft_error(char *current_line, t_map *map, int fd);
+void	ft_error(char *str);
 
 
-//void	count_lines(t_map *map);
 
 // GAME_SETUP
 void	*put_img(t_map *map, char *img_path, int x, int y);
@@ -107,7 +109,6 @@ int check_next_field(int move, char key, t_map *map);
 // GAME_PLAY
 int		check_for_win(t_map *map);
 int		key_hook(int keycode, t_map *map);
-//void	check_next_field(int keycode, t_map *map);
 int		check_next_field(int move, char key, t_map *map);
 
 

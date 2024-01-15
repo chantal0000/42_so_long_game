@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 16:15:03 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/15 17:48:46 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@
 // LIBFT
 # include "./libft/libft.h"
 
-# define IMG_HEIGHT	64
-# define IMG_WIDTH	64
+# define IMG_HEIGHT	32
+# define IMG_WIDTH	32
 
 // IMAGE PATHS
-# define SPACE_XPM "assets/space1.xpm"
+# define SPACE_XPM "assets/background.xpm"
 # define WALLS_XPM "assets/walls.xpm"
 # define PRICE_XPM "assets/collectable.xpm"
 # define EXIT_XPM "assets/exit.xpm"
-# define PLAYER_XPM "assets/smile.xpm"
+# define PLAYER_XPM "assets/player.xpm"
 
 // KEYS
 # define W 119

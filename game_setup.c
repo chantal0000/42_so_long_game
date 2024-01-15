@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 08:46:39 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 15:55:08 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/15 16:28:09 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	*put_img(t_map *map, char *img_path, int x, int y)
 	img_width = 0;
 	img_height = 0;
 	img = mlx_xpm_file_to_image(map->mlx, img_path, &img_width, &img_height);
-	mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 64, y * 64);
+	mlx_put_image_to_window(map->mlx, map->mlx_win, img, x * 32, y * 32);
 	return (img);
 }
 

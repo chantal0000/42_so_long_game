@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:30 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 14:37:11 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:08:54 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ int	main(int argc, char **argv)
 		init_game(map);
 	}
 	else
-	// ERROR??
+	{
+		free(map);
+		ft_error("Error\nPlease add the Program 'so_long' and a valid Map\n");
+	}
 	return (0);
 }

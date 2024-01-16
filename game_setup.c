@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 08:46:39 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 16:28:09 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/16 14:06:31 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ int	key_hook(int keycode, t_map *map)
 		clean_up(map);
 		exit(0);
 	}
+	return (0);
+}
+int	close_on_x(t_map *map)
+{
+	clean_up(map);
+	exit(0);
 	return (0);
 }
 
@@ -107,5 +113,6 @@ void	init_game(t_map *map)
 	}
 	get_tiles(map);
 	mlx_key_hook(map->mlx_win, key_hook, map);
+	mlx_hook(map->mlx_win, 17, (1L << 2), close_on_x, map);
 	mlx_loop(map->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:08:49 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 12:33:26 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/16 20:10:14 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	map_check(t_map *map)
 		y++;
 	}
 	if (!(map->player) || !(map->exit) || !(map->collectable_total))
+		clean_up_1(map);
+	if (check_map_solvable(map) == 1)
 		clean_up_1(map);
 }
 

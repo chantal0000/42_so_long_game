@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/16 14:04:54 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/16 20:11:02 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ int		check_chars(t_map *map, int y, int x);
 // MAP_FUNCTIONS/MAP_INIT.c
 void	init_map_struct(t_map *map);
 void	init_map_struct_2(t_map *map);
+
+// MAP_FUNCTIONS/CHECK_MAP_SOLVABLE.C
+int	check_map_solvable(t_map *map);
 
 // SO_LONG_UTILS
 void	ft_error(char *str);

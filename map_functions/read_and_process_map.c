@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:36:49 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 14:43:58 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/16 20:31:09 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ int	create_map_array(char *file_name, t_map *map, int fd)
 		ft_error("Error\nFailed to open file");
 	map->map_array = malloc(sizeof(char *) * map->rows);
 	if (!map->map_array)
-		return (0);
+	{
+			ft_printf("Memory not allocated\n");
+			exit(0);
+	}
 	new_line = get_next_line(fd);
 	array_loop(new_line, fd, map);
 	close(fd);

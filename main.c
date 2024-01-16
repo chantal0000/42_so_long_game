@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:30 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/16 14:08:54 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/16 20:30:13 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ int	main(int argc, char **argv)
 
 	map = malloc(sizeof(t_map));
 	if (!map)
-		return (1);
-	//HANDLE ERROR ABOVE
+	{
+		ft_printf("Memory not allocated\n");
+		exit(0);
+	}
 	if (argc == 2)
 	{
 		check_filetype(argv[1]);
@@ -30,7 +32,7 @@ int	main(int argc, char **argv)
 	else
 	{
 		free(map);
-		ft_error("Error\nPlease add the Program 'so_long' and a valid Map\n");
+		ft_error("Error\nPlease run the Program 'so_long' with a 'map.ber' file\n");
 	}
 	return (0);
 }

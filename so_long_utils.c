@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:14:34 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/16 20:16:35 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/16 20:38:04 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,12 @@ void	check_filetype(char *file_name)
 		ft_printf("Error\nEncountered a mistake in the file: %s\n", file_name);
 		exit (1);
 	}
+}
+
+
+int	close_on_x(t_map *map)
+{
+	clean_up(map);
+	exit(0);
+	return (0);
 }

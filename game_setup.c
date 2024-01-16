@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 08:46:39 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/16 14:06:31 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/16 20:37:55 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ int	key_hook(int keycode, t_map *map)
 		clean_up(map);
 		exit(0);
 	}
-	return (0);
-}
-int	close_on_x(t_map *map)
-{
-	clean_up(map);
-	exit(0);
 	return (0);
 }
 

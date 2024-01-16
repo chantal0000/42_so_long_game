@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:30:45 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/16 20:30:52 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/16 20:39:22 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // check that you can reach the exit and collectables from the pos of the player
 // y and x mixed up??
-int flood_fill(t_map *tmp, int y, int x)
+int	flood_fill(t_map *tmp, int y, int x)
 {
 	if (tmp->map_array[y][x] == '1')
 		return (0);

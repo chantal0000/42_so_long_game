@@ -6,13 +6,15 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:47:49 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/15 14:48:11 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:16:28 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-//function to initialize the map structure I/II
+/*
+** function to initialize the map structure I/II
+*/
 void	init_map_struct(t_map *map)
 {
 	map->mlx = NULL;
@@ -27,7 +29,9 @@ void	init_map_struct(t_map *map)
 	init_map_struct_2(map);
 }
 
-//function to initialize the map structure II/II
+/*
+** function to initialize the map structure II/II
+*/
 void	init_map_struct_2(t_map *map)
 {
 	map->map_array = NULL;

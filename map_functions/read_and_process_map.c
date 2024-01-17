@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:36:49 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/16 20:40:41 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:31:15 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /*
 ** Reads the map file specified by file_name and initializes the t_map structure
 ** map with information such as the number of rows, columns, and the map array.
+** calls the init_map_struct to init struct
 ** Calls the create_map_array function to create the map array.
 */
 int	read_map(char *file_name, t_map *map)
@@ -66,7 +67,9 @@ int	create_map_array(char *file_name, t_map *map, int fd)
 	return (0);
 }
 
-// helper function to process each line of the map array
+/*
+** helper function to process each line of the map array
+*/
 void	array_loop(char *new_line, int fd, t_map *map)
 {
 	int	k;

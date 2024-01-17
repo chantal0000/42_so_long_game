@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:57 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/16 20:38:49 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/17 10:50:57 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ int		check_map_solvable(t_map *map);
 
 // SO_LONG_UTILS
 void	ft_error(char *str);
-void	clean_up_1(t_map *map);
+void	clean_up_map(char *str, t_map *map);
 void	handle_error(t_map *map);
 int		close_on_x(t_map *map);
-void	check_filetype(char *filename);
+int		check_filetype(char *filename);
 
 // GAME_SETUP
 void	*put_img(t_map *map, char *img_path, int x, int y);
@@ -114,5 +114,5 @@ void	checking(t_map *map, int move, char pos);
 // FREE
 void	clean_up(t_map *map);
 void	free_array(t_map *map);
-void	check_filetype(char *file_name);
+// int		check_filetype(char *file_name);
 #endif

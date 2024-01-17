@@ -6,21 +6,27 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:14:34 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/16 20:38:04 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:29:59 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/*
+** error handling, write msg, exit
+*/
 void	ft_error(char *str)
 {
 	ft_printf("%s", str);
 	exit(1);
 }
 
-void	clean_up_1(t_map *map)
+/*
+** free function in case there is a map/input error
+*/
+void	clean_up_map(char *str, t_map *map)
 {
-	ft_printf("Error\nInvalid configuration detected in the map\n");
+	ft_printf("%s", str);
 	if (map->map_array)
 		free_array(map);
 	if (map->mlx_win)
@@ -34,23 +40,30 @@ void	clean_up_1(t_map *map)
 	exit(1);
 }
 
+/*
+** error handling, freeing map, exits
+*/
 void	handle_error(t_map *map)
 {
 	write(1, "Error\n", 6);
 	clean_up(map);
-	// free all things here
 	exit (1);
+}
+/*
+** closing the game
+*/
+
+int	close_on_x(t_map *map)
+{
+	clean_up(map);
+	exit(0);
+	return (0);
 }
 
 /*
-** Function to check if the given filename has a .ber extension.
-** It compares the last four characters of the filename with ".ber"
-** and exits with an error message if the condition is not met.
-**
-** Parameters:
-**   - filename: The name of the file to be checked.
+** checking the filetype for .ber
 */
-void	check_filetype(char *file_name)
+int	check_filetype(char *file_name)
 {
 	int	len;
 
@@ -58,14 +71,7 @@ void	check_filetype(char *file_name)
 	if (len < 4 || ft_strcmp(file_name + len - 4, ".ber") != 0)
 	{
 		ft_printf("Error\nEncountered a mistake in the file: %s\n", file_name);
-		exit (1);
+		return (1);
 	}
-}
-
-
-int	close_on_x(t_map *map)
-{
-	clean_up(map);
-	exit(0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:30:45 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/16 20:39:22 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/17 10:21:25 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,7 @@ int	check_map_solvable(t_map *map)
 	i = 0;
 	tmp.map_array = (char **)malloc(sizeof(char *) * tmp.rows);
 	if (!tmp.map_array)
-	{
-		ft_printf("Memory not allocated\n");
-		exit(0);
-	}
+		ft_error("Error\nMemory allocation failed\n");
 	while (i < tmp.rows)
 	{
 		tmp.map_array[i] = ft_strdup(map->map_array[i]);
@@ -75,10 +72,7 @@ int	check_map_solvable(t_map *map)
 	}
 	flood_fill(&tmp, tmp.pos_player_y, tmp.pos_player_x);
 	if (!(tmp.exit == 1 && tmp.collectable_total == 0))
-	{
-		free_tmp_array(tmp.map_array, tmp.rows);
-		return (1);
-	}
+		clean_up_map("Error\nThis game is not solvable\n", map);
 	free_tmp_array(tmp.map_array, tmp.rows);
 	return (0);
 }

@@ -6,14 +6,16 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 08:46:39 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/16 20:37:55 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/17 11:30:25 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// function recoginzing the keys and sending info to check next or closing
-// the game
+/*
+** Recognizes keyboard input (keycodes) and triggers corresponding actions.
+** Supports arrow keys and WASD for movement, ESC to exit the game.
+*/
 int	key_hook(int keycode, t_map *map)
 {
 	if (keycode == LEFT || keycode == A)
@@ -32,6 +34,9 @@ int	key_hook(int keycode, t_map *map)
 	return (0);
 }
 
+/*
+** Loads an image from a file and displays it at specified coordinates
+*/
 void	*put_img(t_map *map, char *img_path, int x, int y)
 {
 	void	*img;
@@ -46,6 +51,9 @@ void	*put_img(t_map *map, char *img_path, int x, int y)
 	return (img);
 }
 
+/*
+** Updates displayed images based on the map's contents at a specific position.
+*/
 void	update_img(t_map *map, int x, int y)
 {
 	if (map->space_image != NULL)
@@ -69,6 +77,9 @@ void	update_img(t_map *map, int x, int y)
 		map->exit_image = put_img(map, EXIT_XPM, x, y);
 }
 
+/*
+** Updates all tiles on the map by calling update_img for each position.
+*/
 void	get_tiles(t_map *map)
 {
 	int	x;
@@ -88,6 +99,12 @@ void	get_tiles(t_map *map)
 	}
 }
 
+/*
+** Initializes the game, including creating the window, loading images, and
+** setting up event hooks.
+** Displays an image (if available) at specific coordinates and enters the
+** mlx event loop.
+*/
 void	init_game(t_map *map)
 {
 	void	*img;

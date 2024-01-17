@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 13:41:30 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/17 10:58:38 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:15:58 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 
 	map = malloc(sizeof(t_map));
 	if (!map)
-		ft_error("Error\nMemory allocation failed\n");
+		ft_error("Error\nMemory allocation failed\n", NULL);
 	if (argc == 2)
 	{
 		if (check_filetype(argv[1]) == 1)
@@ -39,9 +39,6 @@ int	main(int argc, char **argv)
 		init_game(map);
 	}
 	else
-	{
-		free(map);
-		ft_error("Error\nPlease run the Program with one '.ber' file\n");
-	}
+		ft_error("Error\nPlease run the Program with one '.ber' file\n", map);
 	return (0);
 }

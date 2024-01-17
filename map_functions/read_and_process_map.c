@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 14:36:49 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/17 11:31:15 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:14:51 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,14 @@ int	read_map(char *file_name, t_map *map)
 	new_line = NULL;
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
-		ft_error("Error\nFailed to open file");
-	init_map_struct(map);
+		ft_error("Error\nFailed to open file\n", map);
 	new_line = get_next_line(fd);
+	if (new_line == NULL)
+	{
+		free(new_line);
+		ft_error("Error\nMap is empty\n", map);
+	}
+	init_map_struct(map);
 	while (new_line != NULL)
 	{
 		map->rows++;
@@ -54,7 +59,7 @@ int	create_map_array(char *file_name, t_map *map, int fd)
 	new_line = NULL;
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
-		ft_error("Error\nFailed to open file");
+		ft_error("Error\nFailed to open file", map);
 	map->map_array = malloc(sizeof(char *) * map->rows);
 	if (!map->map_array)
 	{

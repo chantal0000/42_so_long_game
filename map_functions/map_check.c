@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 13:08:49 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/17 11:30:44 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:16:53 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	map_check(t_map *map)
 		y++;
 	}
 	if (!(map->player) || !(map->exit) || !(map->collectable_total))
-		clean_up_map("Error\nPlayer, Exit or Collectible missing\n", map);
+		clean_up_map("Error\nPlayer, Exit or Collectible\n", map);
 }
 
 /*

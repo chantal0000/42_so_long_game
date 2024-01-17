@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 12:30:45 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/17 10:21:25 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:14:42 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	check_map_solvable(t_map *map)
 	i = 0;
 	tmp.map_array = (char **)malloc(sizeof(char *) * tmp.rows);
 	if (!tmp.map_array)
-		ft_error("Error\nMemory allocation failed\n");
+		ft_error("Error\nMemory allocation failed\n", map);
 	while (i < tmp.rows)
 	{
 		tmp.map_array[i] = ft_strdup(map->map_array[i]);

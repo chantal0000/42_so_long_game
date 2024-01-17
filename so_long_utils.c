@@ -6,7 +6,7 @@
 /*   By: chbuerge <chbuerge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 10:14:34 by chbuerge          #+#    #+#             */
-/*   Updated: 2024/01/17 11:29:59 by chbuerge         ###   ########.fr       */
+/*   Updated: 2024/01/17 12:15:09 by chbuerge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 /*
 ** error handling, write msg, exit
 */
-void	ft_error(char *str)
+void	ft_error(char *str, t_map *map)
 {
 	ft_printf("%s", str);
+	free(map);
+	map = NULL;
 	exit(1);
 }
 
